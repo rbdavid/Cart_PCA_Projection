@@ -223,7 +223,7 @@ def data_projection(data,mean_vector,var_vector,eigvec,nProjections,system_descr
 
         return projection_data
 
-def kmeans_clustering(projection_data,equilib_frame,nClusters_list,system_descriptor,cluster_labels_output_string,cluster_figure_names, step = 1):
+def kmeans_clustering(projection_data,nClusters_list,system_descriptor,cluster_labels_output_string,cluster_figure_names, step = 1):
         """
         """
 
@@ -232,7 +232,7 @@ def kmeans_clustering(projection_data,equilib_frame,nClusters_list,system_descri
         nFrames = len(projection_data)
 	nFrames_range = range(nFrames)
         nColVars = len(projection_data[0])
-        frame_numbers = [equilib_frame + i*step for i in nFrames_range]
+        frame_numbers = [i*step for i in nFrames_range]
         elbow_w_list = []
         with open(system_descriptor+'.cluster_validation.dat','w') as W, open(system_descriptor+'.cluster_centers.dat','w') as X:
                 X.write('# cluster number, minimum euclid dist to centroid, index of frame closest to centroid, number of frames in cluster\n')
@@ -261,7 +261,7 @@ def kmeans_clustering(projection_data,equilib_frame,nClusters_list,system_descri
                                                 if eu_dist2 < min_eu_dist2:
                                                         min_eu_dist2 = eu_dist2
                                                         min_index = j
-                                X.write('%d   %f   %d   %d\n'%(i,min_eu_dist2**0.5,int(min_index+equilib_frame),len(projection_data[cluster_labels == i])))
+                                X.write('%d   %f   %d   %d\n'%(i,min_eu_dist2**0.5,int(min_index),len(projection_data[cluster_labels == i])))
                        
                         #-------------------------------------
                         # Calculating the euclidian distance btw each centroid, using the projection space

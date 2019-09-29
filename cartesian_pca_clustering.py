@@ -111,7 +111,7 @@ def main():
         zero_padded_string_formatting = '%0'+'%d'%(int(np.log10(parameters['nProjections']))+1)+'d'
         projected_data_figure_names = parameters['output_directory'] + zero_padded_string_formatting +'.' + parameters['system_descriptor'] + '.projected_data.1d_hist.' + parameters['figure_format']
         
-        projected_data = data_projection(data,mean_vector,variance_vector,eigenvector_matrix,parameters['nProjections'],system_descriptor,standardize=parameters['pca_on_correlation_matrix_boolean'],plotting_bool = parameters['plotting_boolean'],eigenvec_projection_figure_names=projected_data_figure_names,nBins=250,test_eigenvec_projections=True)
+        projected_data = data_projection(data,mean_vector,variance_vector,eigenvector_matrix,parameters['nProjections'],system_descriptor,plotting_bool = parameters['plotting_boolean'],eigenvec_projection_figure_names=projected_data_figure_names,nBins=250,test_eigenvec_projections=True)
 
         # ----------------------------------------
         # clustering analysis and plotting
@@ -119,7 +119,7 @@ def main():
         cluster_labels_output_string = parameters['output_directory'] + zero_padded_string_formatting + '.' + parameters['system_descriptor']
         cluster_figure_names = parameters['output_directory'] + zero_padded_string_formatting + '.' + parameters['system_descriptor'] + '.clustering.' + parameters['figure_format']
         
-        kmeans_clustering(projected_data,parameters['nCluster_list'],system_descriptor,cluster_labels_output_string,cluster_figure_names,step = parameters['step_nFrames'])
+        kmeans_clustering(projected_data,parameters['nCluster_list'],system_descriptor,cluster_labels_output_string,cluster_figure_names)
         print 'Finished clustering the data. Done with the analyses encoded by this script. How does the data look?'
 
         # ----------------------------------------
@@ -135,6 +135,8 @@ config_parser(config_file)
 
 # ----------------------------------------
 # LOADING IN NECESSARY FUNCTIONS FROM MODULE FILES
+
+plot_2dmatrix = importlib.import_module(parameters['pca_clustering_functions_file'].split('.')[0],package=None).plot_2dmatrix
 
 pca_calc = importlib.import_module(parameters['pca_clustering_functions_file'].split('.')[0],package=None).pca_calc
 
