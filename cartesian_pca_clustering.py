@@ -14,8 +14,6 @@
 #       3) PCA on cartesian coordinate covariance
 #           a) PCA
 #           b) Project timestep data onto PC eigenvectors
-#           c) k-means clustering of projected data
-#           d) Create structural representations of eigenvectors
 
 # ----------------------------------------
 # PREAMBLE:
@@ -41,15 +39,6 @@ def main():
     mean_vector = np.ndarray.flatten(np.loadtxt(parameters['average_structure_file']))
     covariance_matrix = np.loadtxt(parameters['covariance_matrix_file'])
 
-    #NOTE: IS THIS PLOTTING CHUNK NECESSARY? WORTH WHILE?
-    # ----------------------------------------
-    # Plotting Mean, Covariance, and Correlation results
-    # ----------------------------------------
-    if parameters['plotting_boolean']:
-        # plotting covariance matrix as 2d heatmap 
-        covar_matrix_heatmap_figure_name = system_descriptor + '.covar_matrix.heatmap.' + parameters['figure_format']
-        plot_2dmatrix(covariance_matrix,covar_matrix_heatmap_figure_name,cbar_label='Covariance of Collective Variables ($\AA^{2}$)',plotting_cmap='bwr',v_range=[-np.max(covariance_matrix),np.max(covariance_matrix)])
-
     # ----------------------------------------
     # 3a) PCA
     # ----------------------------------------
@@ -64,19 +53,6 @@ def main():
     zero_padded_string_formatting = '%0'+'%d'%(int(np.log10(parameters['nProjections']))+1)+'d'
     projected_data_figure_names = parameters['output_directory'] + zero_padded_string_formatting +'.' + parameters['system_descriptor'] + '.projected_data.1d_hist.' + parameters['figure_format']
     projected_data = data_projection(data,mean_vector,eigenvector_matrix,parameters['nProjections'],system_descriptor,plotting_bool = parameters['plotting_boolean'],eigenvec_projection_figure_names=projected_data_figure_names,nBins=250,test_eigenvec_projections=True)
-
-    # ----------------------------------------
-    # 3c) K-means clustering of projected data
-    # ----------------------------------------
-    zero_padded_string_formatting = '%0'+'%d'%(int(np.log10(np.max(parameters['nCluster_list']))+1))+'d'
-    cluster_labels_output_string = parameters['output_directory'] + zero_padded_string_formatting + '.' + parameters['system_descriptor']
-    cluster_figure_names = parameters['output_directory'] + zero_padded_string_formatting + '.' + parameters['system_descriptor'] + '.clustering.' + parameters['figure_format']
-    kmeans_clustering(projected_data,parameters['nCluster_list'],system_descriptor,cluster_labels_output_string,cluster_figure_names)
-    print 'Finished clustering the data. Done with the analyses encoded by this script. How does the data look?'
-
-    # ----------------------------------------
-    # 3d) Create structural representations of eigenvectors
-    # ----------------------------------------
 
     # ----------------------------------------
     # SUMMARY OUTPUT 
@@ -100,14 +76,9 @@ if parameters['output_directory'][-1] != os.sep:
 # ----------------------------------------
 # 2) LOADING IN NECESSARY FUNCTIONS FROM MODULE FILES
 # ----------------------------------------
-
-plot_2dmatrix = importlib.import_module(parameters['pca_clustering_functions_file'].split('.')[0],package=None).plot_2dmatrix
-
 pca_calc = importlib.import_module(parameters['pca_clustering_functions_file'].split('.')[0],package=None).pca_calc
 
 data_projection = importlib.import_module(parameters['pca_clustering_functions_file'].split('.')[0],package=None).data_projection
-
-kmeans_clustering = importlib.import_module(parameters['pca_clustering_functions_file'].split('.')[0],package=None).kmeans_clustering
 
 # ----------------------------------------
 # MAIN
