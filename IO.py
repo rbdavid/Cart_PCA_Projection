@@ -21,18 +21,14 @@ def config_parser(config_file,parameters):
         parameters: dictionary object that will contain the keys and values for parameters to be used in the script
     
     """
-    necessary_parameters = ['output_directory','system_descriptor','pca_clustering_functions_file','nCluster_list']
-    all_parameters = ['output_directory','system_descriptor','pca_clustering_functions_file','nCluster_list','user_defined_data_file','user_defined_mean_vector_file','user_defined_variance_vector_file','user_defined_covariance_matrix_file','plotting_boolean','nProjections','figure_format','write_summary']
+    necessary_parameters = ['output_directory','system_descriptor','pca_clustering_functions_file','nCluster_list','cartesian_coordinates_file','average_structure_file','covariance_matrix_file']
+    all_parameters = ['output_directory','system_descriptor','pca_clustering_functions_file','nCluster_list','cartesian_coordinates_file','average_structure_file','covariance_matrix_file','plotting_boolean','nProjections','figure_format','write_summary']
 
     # NECESSARY PARAMETERS ARE INITIALIZED IN DICTIONARY WITH EMPTY STRINGS:
     for i in range(len(necessary_parameters)):
         parameters[necessary_parameters[i]] = ''
     
     # SETTING DEFAULT PARAMETERS FOR OPTIONAL PARAMETERS:
-    parameters['user_defined_data_file'] = None
-    parameters['user_defined_mean_vector_file'] = None
-    parameters['user_defined_variance_vector_file'] = None
-    parameters['user_defined_covariance_matrix_file'] = None
     parameters['plotting_boolean'] = False
     parameters['nProjections'] = 2
     parameters['figure_format'] = 'png'

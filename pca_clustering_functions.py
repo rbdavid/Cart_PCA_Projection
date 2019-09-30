@@ -190,14 +190,12 @@ def pca_calc(square_matrix,system_descriptor,eigenvector_output_filename):
         # RETURN THE EIGENVEC ARRAY
         return eigvec
 
-def data_projection(data,mean_vector,var_vector,eigvec,nProjections,system_descriptor,standardize=False,plotting_bool=True,eigenvec_projection_figure_names='%d.projected_data.1d_hist.png',nBins=100,test_eigenvec_projections=True):
+def data_projection(data,mean_vector,eigvec,nProjections,system_descriptor,plotting_bool=True,eigenvec_projection_figure_names='%d.projected_data.1d_hist.png',nBins=100,test_eigenvec_projections=True):
         """
         """
 
-	nProjection_range = range(nProjections)
+	nProjection_range = list(range(nProjections))
         data -= mean_vector
-        if standardize:
-                data /= var_vector**0.5		# not an issue, since variance should never be zero
         projection_data = np.zeros((len(data),nProjections),dtype=np.float64)
         for i in nProjection_range:
                 projection_data[:,i] = np.dot(data,eigvec[:,i])
