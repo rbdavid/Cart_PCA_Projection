@@ -156,5 +156,3 @@ def data_projection(data,mean_vector,eigvec,nProjections,system_descriptor,plott
 
     np.savetxt(system_descriptor+'.projected_data.dat',projection_data,fmt='%f')
 
-    return projection_data
-
