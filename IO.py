@@ -21,8 +21,8 @@ def config_parser(config_file,parameters):
         parameters: dictionary object that will contain the keys and values for parameters to be used in the script
     
     """
-    necessary_parameters = ['output_directory','system_descriptor','pca_clustering_functions_file','nCluster_list','cartesian_coordinates_file','average_structure_file','covariance_matrix_file']
-    all_parameters = ['output_directory','system_descriptor','pca_clustering_functions_file','nCluster_list','cartesian_coordinates_file','average_structure_file','covariance_matrix_file','plotting_boolean','nProjections','figure_format','write_summary']
+    necessary_parameters = ['output_directory','system_descriptor','pca_clustering_functions_file','cartesian_coordinates_file','average_structure_file','covariance_matrix_file']
+    all_parameters = ['output_directory','system_descriptor','pca_clustering_functions_file','cartesian_coordinates_file','average_structure_file','covariance_matrix_file','plotting_boolean','nProjections','figure_format','write_summary']
 
     # NECESSARY PARAMETERS ARE INITIALIZED IN DICTIONARY WITH EMPTY STRINGS:
     for i in range(len(necessary_parameters)):
