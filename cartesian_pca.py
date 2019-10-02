@@ -2,7 +2,7 @@
 # ----------------------------------------
 # USAGE:
 # ----------------------------------------
-# python3 cartesian_pca_clustering.py config_file.config IO_functions_file
+# python3 cartesian_pca.py config_file.config IO_functions_file
 
 # ----------------------------------------
 # CODE OUTLINE
@@ -24,7 +24,6 @@ import os
 import importlib
 import numpy as np
 import MDAnalysis
-from IO import config_parser,summary
 
 config_file = sys.argv[1]
 IO_functions_file = sys.argv[2]
@@ -49,7 +48,7 @@ def main():
     zero_padded_string_formatting = '%0'+'%d'%(int(np.log10(len(mean_vector)))+1)+'d'
     eigenvector_output_filename = parameters['output_directory'] + zero_padded_string_formatting +'.' + parameters['system_descriptor'] + '.pca_eigenvector.dat'
     eigenvector_matrix = pca_calc(covariance_matrix,system_descriptor,eigenvector_output_filename)
-    print 'Finished the principle component analysis on the covariance matrix. Onto projecting the raw data onto the eigenvectors.'
+    print('Finished the principle component analysis on the covariance matrix. Onto projecting the raw data onto the eigenvectors.')
 
     # ----------------------------------------
     # 3b) Project timestep data onto PC eigenvectors
@@ -62,7 +61,7 @@ def main():
     # SUMMARY OUTPUT 
     # ----------------------------------------
     if parameters['write_summary']:
-        summary_filename = system_descriptor + '.cartesian_pca_clustering.summary'
+        summary_filename = system_descriptor + '.cartesian_pca.summary'
         summary(summary_filename,sys.argv,parameters)
 
 # ----------------------------------------
@@ -80,9 +79,9 @@ if parameters['output_directory'][-1] != os.sep:
 # ----------------------------------------
 # 2) LOADING IN NECESSARY FUNCTIONS FROM MODULE FILES
 # ----------------------------------------
-pca_calc = importlib.import_module(parameters['pca_clustering_functions_file'].split('.py')[0],package=None).pca_calc
+pca_calc = importlib.import_module(parameters['pca_functions_file'].split('.py')[0],package=None).pca_calc
 
-data_projection = importlib.import_module(parameters['pca_clustering_functions_file'].split('.py')[0],package=None).data_projection
+data_projection = importlib.import_module(parameters['pca_functions_file'].split('.py')[0],package=None).data_projection
 
 # ----------------------------------------
 # MAIN

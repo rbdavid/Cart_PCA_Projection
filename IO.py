@@ -9,7 +9,7 @@ import sys
 # ----------------------------------------
 # FUNCTIONS: 
 # ----------------------------------------
-def cartesian_pca_config_parser(config_file,parameters):	
+def cartesian_pca_config_parser(config_file,parameters):
     """ Function to take config file and create/fill the parameter dictionary (created before function call). 
 
     Usage: 
@@ -21,8 +21,8 @@ def cartesian_pca_config_parser(config_file,parameters):
         parameters: dictionary object that will contain the keys and values for parameters to be used in the script
     
     """
-    necessary_parameters = ['output_directory','system_descriptor','pca_clustering_functions_file','cartesian_coordinates_file','average_structure_file','covariance_matrix_file']
-    all_parameters = ['output_directory','system_descriptor','pca_clustering_functions_file','cartesian_coordinates_file','average_structure_file','covariance_matrix_file','plotting_boolean','nProjections','figure_format','write_summary']
+    necessary_parameters = ['output_directory','system_descriptor','pca_functions_file','cartesian_coordinates_file','average_structure_file','covariance_matrix_file']
+    all_parameters = ['output_directory','system_descriptor','pca_functions_file','cartesian_coordinates_file','average_structure_file','covariance_matrix_file','plotting_boolean','nProjections','figure_format','write_summary']
 
     # NECESSARY PARAMETERS ARE INITIALIZED IN DICTIONARY WITH EMPTY STRINGS:
     for i in range(len(necessary_parameters)):
@@ -57,11 +57,11 @@ def cartesian_pca_summary(summary_filename,arguments,parameters):
     
     """
     with open(summary_filename,'w') as f:
-    	f.write('To recreate this analysis, run this line:\n')
-    	for i in range(len(arguments)):
-    	    f.write('%s ' %(arguments[i]))
-    	f.write('\n\n')
-    	f.write('Parameters used:\n')
+        f.write('To recreate this analysis, run this line:\n')
+        for i in range(len(arguments)):
+            f.write('%s ' %(arguments[i]))
+        f.write('\n\n')
+        f.write('Parameters used:\n')
         for key, value in list(parameters.items()):
             if key == '__builtins__':
                 continue
@@ -69,5 +69,5 @@ def cartesian_pca_summary(summary_filename,arguments,parameters):
                 f.write("%s = %s\n" %(key,value))
             else:
                 f.write("%s = '%s'\n" %(key,value))
-    	f.write('\n')
+        f.write('\n')
 

@@ -149,9 +149,9 @@ def data_projection(data,mean_vector,eigvec,nProjections,system_descriptor,plott
 
     if test_eigenvec_projections:
         print('The data has been mean centered :. the average of the projected data should be zero. The dot product of the eigenvectors should be zero. The slope of projected data should be close to zero as well.')
-    	for i in nProjection_range[:-2]:
+        for i in nProjection_range[:-2]:
             print('Eigenvec', i, ' average = ', np.mean(projection_data[:,i]))
-    	    for j in nProjection_range[i+1:]:
+            for j in nProjection_range[i+1:]:
                 print('Eigenvec', i, 'and eigenvec', j,': dot product = ', np.dot(eigvec[:,i],eigvec[:,j]), 'slope, intercept of linear least squares:', np.polyfit(projection_data[:,i],projection_data[:,j],deg=1))
 
     np.savetxt(system_descriptor+'.projected_data.dat',projection_data,fmt='%f')
