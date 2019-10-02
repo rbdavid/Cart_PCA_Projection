@@ -29,8 +29,8 @@ from IO import config_parser,summary
 config_file = sys.argv[1]
 IO_functions_file = sys.argv[2]
 
-config_parser = importlib.import_module(IO_functions_file.split('.py')[0],package=None).config_parser
-summary = importlib.import_module(IO_functions_file.split('.py')[0],package=None).summary
+config_parser = importlib.import_module(IO_functions_file.split('.py')[0],package=None).cartesian_pca_config_parser
+summary = importlib.import_module(IO_functions_file.split('.py')[0],package=None).cartesian_pca_summary
 
 # ----------------------------------------
 # FUNCTIONS:

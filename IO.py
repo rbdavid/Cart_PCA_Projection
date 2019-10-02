@@ -9,7 +9,7 @@ import sys
 # ----------------------------------------
 # FUNCTIONS: 
 # ----------------------------------------
-def config_parser(config_file,parameters):	
+def cartesian_pca_config_parser(config_file,parameters):	
     """ Function to take config file and create/fill the parameter dictionary (created before function call). 
 
     Usage: 
@@ -44,7 +44,7 @@ def config_parser(config_file,parameters):
             print('%s has not been assigned a value. This variable is necessary for the script to run. Please declare this variable within the config file.' %(key))
             sys.exit()
 
-def summary(summary_filename,arguments,parameters):
+def cartesian_pca_summary(summary_filename,arguments,parameters):
     """ Function to create a text file that holds important information about the analysis that was just performed. Outputs the version of MDAnalysis, how to rerun the analysis, and the parameters used in the analysis.
     
     Usage:
