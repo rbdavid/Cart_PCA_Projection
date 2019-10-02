@@ -2,7 +2,7 @@
 # ----------------------------------------
 # USAGE:
 # ----------------------------------------
-# python3 cartesian_pca_clustering.py config_file.config
+# python3 cartesian_pca_clustering.py config_file.config IO_functions_file
 
 # ----------------------------------------
 # CODE OUTLINE
@@ -27,6 +27,10 @@ import MDAnalysis
 from IO import config_parser,summary
 
 config_file = sys.argv[1]
+IO_functions_file = sys.argv[2]
+
+config_parser = importlib.import_module(IO_functions_file.split('.py')[0],package=None).config_parser
+summary = importlib.import_module(IO_functions_file.split('.py')[0],package=None).summary
 
 # ----------------------------------------
 # FUNCTIONS:
@@ -76,9 +80,9 @@ if parameters['output_directory'][-1] != os.sep:
 # ----------------------------------------
 # 2) LOADING IN NECESSARY FUNCTIONS FROM MODULE FILES
 # ----------------------------------------
-pca_calc = importlib.import_module(parameters['pca_clustering_functions_file'].split('.')[0],package=None).pca_calc
+pca_calc = importlib.import_module(parameters['pca_clustering_functions_file'].split('.py')[0],package=None).pca_calc
 
-data_projection = importlib.import_module(parameters['pca_clustering_functions_file'].split('.')[0],package=None).data_projection
+data_projection = importlib.import_module(parameters['pca_clustering_functions_file'].split('.py')[0],package=None).data_projection
 
 # ----------------------------------------
 # MAIN
