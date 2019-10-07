@@ -139,7 +139,7 @@ def data_projection(data,mean_vector,eigvec,nProjections,system_descriptor,plott
     for i in nProjection_range:
         projection_data[:,i] = np.dot(data,eigvec[:,i])
         if plotting_bool:
-            events,edges,patches = plt.hist(projection_data[:,i],bins=nBins,histtype='bar',normed=True)
+            events,edges,patches = plt.hist(projection_data[:,i],bins=nBins,histtype='bar',density=True)
             plt.grid(b=True, which='major', axis='both', color='#808080', linestyle='--')
             plt.xlabel('Data projected onto Eigenvector %d'%(i))
             plt.ylabel('Probability Density')
