@@ -62,7 +62,7 @@ def main():
     # ----------------------------------------
     # 3c) PROJECT CART. COORDS ONTO EIGENVECTORS
     # ----------------------------------------
-    projected_data_figure_names = parameters['output_directory'] + '%0' + '%d'%(int(np.log10(parameters['nProjections']))+1) + 'd' + parameters['system_descriptor'] + '.projected_data.1d_histi.' + parameters['figure_format']
+    projected_data_figure_names = parameters['output_directory'] + '%0' + '%d'%(int(np.log10(parameters['nProjections']))+1) + 'd.' + parameters['system_descriptor'] + '.projected_data.1d_hist.' + parameters['figure_format']
     eigenvector_data = np.zeros((nCartCoords,parameters['nProjections']))
     for i in list(range(parameters['nProjections'])):
         eigenvector_data[:,i] = np.loadtxt(parameters['eigenvector_file_naming']%(i))
